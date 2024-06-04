@@ -6,6 +6,7 @@ var copy = true
 var initial_position: Vector2
 @onready var tile_map = $"../TileMap"
 var flip = 0
+var input_points = [Vector2(0, 0), Vector2(0, 1)]
 
 
 func _input(event):
@@ -22,11 +23,11 @@ func _input(event):
 			self.queue_free()
 			
 	if event.is_action_pressed("rotate") and dragging:
-		print('rotate')		
+		var rotated_90 = rotate_input_vectors(input_points, 90*flip)
+		print(rotated_90)
 		update_flip()
 		tile_map.update_map_temp(position + self.initial_position, 'yee', flip)
 		
-
 
 	if event is InputEventMouseMotion and dragging:
 		position = event.position - self.initial_position
@@ -62,3 +63,38 @@ func update_flip():
 	flip +=1
 	if flip > 3:
 		flip = 0
+
+func rotate_input_vectors(original_input_points, angle: int) -> Array:
+	# Define the original input points
+	
+	# Initialize rotated input points
+	var rotated_input_points = []
+	
+	# Handle the rotations
+	match angle:
+		0:
+			rotated_input_points = original_input_points
+		90:
+			rotated_input_points = [Vector2(0, 0), Vector2(1, 0)]
+		180:
+			rotated_input_points = [Vector2(1, 1), Vector2(1, 0)]
+		270:
+			rotated_input_points = [Vector2(0, 1), Vector2(1, 1)]
+	return rotated_input_points
+func rotate_output_vectors(original_input_points, angle: int) -> Array:
+	# Define the original input points
+	
+	# Initialize rotated input points
+	var rotated_input_points = []
+	
+	# Handle the rotations
+	match angle:
+		0:
+			rotated_input_points = original_input_points
+		90:
+			rotated_input_points = [Vector2(0,1), Vector2(1, 1)]
+		180:
+			rotated_input_points = [Vector2(0, 0), Vector2(0, 1)]
+		270:
+			rotated_input_points = [Vector2(0, 0), Vector2(1, 0)]
+	return rotated_input_points
