@@ -23,8 +23,6 @@ func _input(event):
 			self.queue_free()
 			
 	if event.is_action_pressed("rotate") and dragging:
-		var rotated_90 = rotate_input_vectors(input_points, 90*flip)
-		print(rotated_90)
 		update_flip()
 		tile_map.update_map_temp(position + self.initial_position, 'yee', flip)
 		
@@ -73,14 +71,14 @@ func rotate_input_vectors(original_input_points, angle: int) -> Array:
 	# Handle the rotations
 	match angle:
 		0:
-			rotated_input_points = original_input_points
+			rotated_input_points =  [Vector2(0, 0), Vector2(0, 1)]
 		90:
 			rotated_input_points = [Vector2(0, 0), Vector2(1, 0)]
 		180:
 			rotated_input_points = [Vector2(1, 1), Vector2(1, 0)]
 		270:
 			rotated_input_points = [Vector2(0, 1), Vector2(1, 1)]
-	return rotated_input_points
+	return [rotated_input_points[0]+original_input_points, rotated_input_points[1]+original_input_points]
 func rotate_output_vectors(original_input_points, angle: int) -> Array:
 	# Define the original input points
 	
@@ -90,11 +88,17 @@ func rotate_output_vectors(original_input_points, angle: int) -> Array:
 	# Handle the rotations
 	match angle:
 		0:
-			rotated_input_points = original_input_points
+			rotated_input_points = [Vector2(2,0), Vector2(2, 1)]
 		90:
-			rotated_input_points = [Vector2(0,1), Vector2(1, 1)]
+			rotated_input_points = [Vector2(0,2), Vector2(1, 2)]
 		180:
-			rotated_input_points = [Vector2(0, 0), Vector2(0, 1)]
+			rotated_input_points = [Vector2(-1, 0), Vector2(-1, 1)]
 		270:
-			rotated_input_points = [Vector2(0, 0), Vector2(1, 0)]
-	return rotated_input_points
+			rotated_input_points = [Vector2(0, -1), Vector2(1, -1)]
+	return  [rotated_input_points[0]+original_input_points, rotated_input_points[1]+original_input_points]
+func set_init_pos(init: Vector2i):
+	self.initial_position = init
+func get_input_vector():
+	return rotate_input_vectors(self.initial_position, flip*90)
+func get_output_vector():
+	return rotate_output_vectors(self.initial_position, flip*90) 
