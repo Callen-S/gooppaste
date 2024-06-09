@@ -2,12 +2,13 @@ extends Panel
 
 var hovered = false
 var dragging =  false
-var copy = true
 var initial_position: Vector2
 @onready var tile_map = $"../TileMap"
 var flip = 0
 var input_points = [Vector2(0, 0), Vector2(0, 1)]
 
+func _ready():
+	print('ye')
 
 func _input(event):
 	if event.is_action_pressed("shift") and dragging:
@@ -33,13 +34,13 @@ func _input(event):
 		
 	
 func _on_mouse_entered():
+	print('ehe')
 	hovered = true
 	
 func start_drag():
 	initial_position = get_local_mouse_position()
-	if self.copy:
-		self.clone()
-		
+	self.clone()
+	print('HUH')
 	dragging = true
 	
 func stop_drag(location: Vector2i):
