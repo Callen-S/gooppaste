@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://f7va6nwrs1n"]
+[gd_scene load_steps=8 format=3 uid="uid://f7va6nwrs1n"]
 
 [ext_resource type="Script" path="res://big_boie.gd" id="1_xklh0"]
 [ext_resource type="Texture2D" uid="uid://c4qb0uhsc8p2l" path="res://Pipes.png" id="2_kosu3"]
-[ext_resource type="Script" path="res://magic_panel.gd" id="3_5n254"]
 [ext_resource type="Script" path="res://map_scipt.gd" id="4_baoi5"]
 [ext_resource type="Texture2D" uid="uid://c5wodfwoe68gs" path="res://IndustrialTile_11.png" id="4_becci"]
 
@@ -257,20 +256,6 @@ sources/1 = SubResource("TileSetAtlasSource_vma28")
 position = Vector2(-1, 0)
 script = ExtResource("1_xklh0")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = 1005.0
-offset_top = 233.0
-offset_right = 1045.0
-offset_bottom = 273.0
-script = ExtResource("3_5n254")
-
-[node name="Panel2" type="Panel" parent="."]
-offset_left = 1076.0
-offset_top = 336.0
-offset_right = 1116.0
-offset_bottom = 376.0
-script = ExtResource("3_5n254")
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_hgxdn")
 format = 2
@@ -280,8 +265,3 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "temp"
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("4_baoi5")
-
-[connection signal="mouse_entered" from="Panel" to="Panel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Panel" to="Panel" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Panel2" to="Panel2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Panel2" to="Panel2" method="_on_mouse_exited"]

@@ -55,6 +55,8 @@ func _on_mouse_exited():
 
 func clone():
 	var other = self.duplicate()
+	other.connect('mouse_entered', other._on_mouse_entered)
+	other.connect('mouse_exited', other._on_mouse_exited)
 	get_parent().add_child(other)
 	return other
 	
