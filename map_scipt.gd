@@ -1,13 +1,13 @@
 extends TileMap
 
 var gridsize = 50
-var dict = {}
+var main_map = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for x in gridsize:
 		for y in gridsize:
-			dict[str(Vector2(x,y))] = 'Base'
+			main_map[str(Vector2(x,y))] = 'Base'
 			set_cell(0, Vector2(x,y), 1, Vector2(0,0),0)
 			
 	pass # Replace with function body.
@@ -22,7 +22,7 @@ func update_map(location: Vector2i, type: String, flip, tile: Panel):
 	if location_on_map[0] < gridsize and location_on_map[1] < gridsize :
 		set_cell(1, location_on_map,0, Vector2i(2,0))
 		rotate_cell(1, location_on_map, 0, Vector2i(2,0),flip)
-		dict[str(location_on_map)] = tile.set_init_pos(location_on_map)
+		main_map[str(location_on_map)] = tile
 		print(tile.get_output_vector())
 	
 		

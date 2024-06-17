@@ -7,8 +7,7 @@ var initial_position: Vector2
 var flip = 0
 var input_points = [Vector2(0, 0), Vector2(0, 1)]
 
-func _ready():
-	print('ye')
+
 
 func _input(event):
 	if event.is_action_pressed("shift") and dragging:
@@ -34,7 +33,6 @@ func _input(event):
 		
 	
 func _on_mouse_entered():
-	print('ehe')
 	hovered = true
 	
 func start_drag():
