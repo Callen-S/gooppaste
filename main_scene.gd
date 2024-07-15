@@ -6,7 +6,7 @@ var rows := 8
 var panel_spacing := 10
 var off_set := 900
 # Preload the Panel script
-var PanelScript := preload("res://magic_panel.gd")
+var PanelScript := preload("res://drop_object.gd")
 
 func _ready():
 	# Get the size of the Control node

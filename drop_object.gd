@@ -11,7 +11,7 @@ var input_points = [Vector2(0, 0), Vector2(0, 1)]
 
 func _input(event):
 	if event.is_action_pressed("shift") and dragging:
-		tile_map.update_map(position + self.initial_position, 'testing', flip, self)
+		tile_map.place_tile(position + self.initial_position, 'testing', flip, self)
 	elif event is InputEventMouseButton and hovered:
 		if event.is_action_pressed("click") and dragging:
 			self.stop_drag(event.position)
@@ -24,12 +24,12 @@ func _input(event):
 			
 	if event.is_action_pressed("rotate") and dragging:
 		update_flip()
-		tile_map.update_map_temp(position + self.initial_position, 'yee', flip)
+		tile_map.place_tile_temp(position + self.initial_position, 'yee', flip)
 		
 
 	if event is InputEventMouseMotion and dragging:
 		position = event.position - self.initial_position
-		tile_map.update_map_temp(event.position, 'yee', flip)
+		tile_map.place_tile_temp(event.position, 'yee', flip)
 		
 	
 func _on_mouse_entered():
@@ -38,13 +38,12 @@ func _on_mouse_entered():
 func start_drag():
 	initial_position = get_local_mouse_position()
 	self.clone()
-	print('HUH')
 	dragging = true
 	
 func stop_drag(location: Vector2i):
 	
 	dragging = false
-	tile_map.update_map(location, 'testing', flip, self)
+	tile_map.place_tile(location, 'testing', flip, self)
 	self.queue_free()
 	
 

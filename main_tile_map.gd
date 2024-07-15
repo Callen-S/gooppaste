@@ -1,38 +1,35 @@
 extends TileMap
 
 var gridsize = 50
-var main_map = {}
+var tile_location_map = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	create_grid()
+	
+func create_grid():
 	for x in gridsize:
 		for y in gridsize:
-			main_map[str(Vector2(x,y))] = 'Base'
-			set_cell(0, Vector2(x,y), 1, Vector2(0,0),0)
-			
-	pass # Replace with function body.
+			tile_location_map[str(Vector2(x,y))] = 'Base'
+			set_cell(0, Vector2(x,y), 0, Vector2(0,0),0)	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-func update_map(location: Vector2i, type: String, flip, tile: Panel):
+func place_tile(location: Vector2i, type: String, flip, tile: Panel):
 	var location_on_map = local_to_map(location)
 	
-	if location_on_map[0] < gridsize and location_on_map[1] < gridsize :
+	if location_valid(location_on_map):
 		set_cell(1, location_on_map,0, Vector2i(2,0))
 		rotate_cell(1, location_on_map, 0, Vector2i(2,0),flip)
-		main_map[str(location_on_map)] = tile
-		print(tile.get_output_vector())
-	
+		tile_location_map[str(location_on_map)] = tile
+
 		
-func update_map_temp(location: Vector2i, type: String, flip):
+func place_tile_temp(location: Vector2i, type: String, flip):
 	self.clear_layer(2)
 	var location_on_map = local_to_map(location)
-	
-	if location_on_map[0] < gridsize and location_on_map[1] < gridsize :
+	if  location_valid(location_on_map):
 		set_cell(2, location_on_map,0, Vector2i(2,0))
 		rotate_cell(2, location_on_map,0, Vector2i(2,0), flip)
+
 		
 func rotate_cell(layer, location_on_map, tile_source, tile, rotation_angle):
 	if rotation_angle == 1:
@@ -42,3 +39,7 @@ func rotate_cell(layer, location_on_map, tile_source, tile, rotation_angle):
 	elif rotation_angle == 3:
 		set_cell(layer, location_on_map,tile_source, tile,0 | TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_TRANSPOSE)
 		
+func location_valid(location: Vector2i):
+	if location[0] < gridsize and location[1] < gridsize:
+		return true
+	else: return false
