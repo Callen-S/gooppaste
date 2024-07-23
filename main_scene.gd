@@ -18,7 +18,7 @@ func _ready():
 		for col in range(columns):
 			var panel: Panel = Panel.new()
 			var new_style = StyleBoxFlat.new()
-			new_style.set_bg_color(Color(1, 1, 0, 1))
+			new_style.set_bg_color(Color(1, 1, 0, 1)) 
 			panel.set_size(panel_size)
 			panel.set("custom_styles/panel", new_style)
 			panel.set_global_position(Vector2(

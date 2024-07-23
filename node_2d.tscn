@@ -8,7 +8,6 @@
 texture = ExtResource("2_wv6cl")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
-2:0/size_in_atlas = Vector2i(2, 2)
 2:0/0 = 0
 4:0/0 = 0
 5:0/0 = 0
